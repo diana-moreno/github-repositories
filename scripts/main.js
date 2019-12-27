@@ -1,14 +1,14 @@
-const searcher = document.getElementById('searcher')
-const resultSection = document.getElementById('resultSection')
-const personalData = document.getElementById('personalData')
+const searcher = document.getElementsByClassName('searcher')[0]
+const repositories = document.getElementsByClassName('repositories')[0]
+const userData = document.getElementsByClassName('user-data')[0]
 
 searcher.addEventListener('submit', getData)
 
 async function getData(event) {
   event.preventDefault()
   const username = event.target.username.value
-  clear(personalData)
-  clear(resultSection)
+  clear(userData)
+  clear(repositories)
   let user = await getUser(username)
   user && await getRepositories(username)
 }
@@ -28,17 +28,18 @@ async function getUser(username) {
     avatar.src = user.avatar_url
     bio.innerHTML = user.bio
 
-    personalData.appendChild(avatar)
-    personalData.appendChild(div)
+    userData.appendChild(avatar)
+    userData.appendChild(div)
     div.appendChild(nickname)
     div.appendChild(name)
     div.appendChild(bio)
+    div.classList.add('user-data__container')
 
     return user
 
   } catch ({ message }) {
     const div = document.createElement('div')
-    personalData.appendChild(div)
+    userData.appendChild(div)
     const errorMessage = document.createElement('p')
     errorMessage.innerHTML = message
     div.appendChild(errorMessage)
@@ -49,7 +50,7 @@ async function getUser(username) {
 async function getRepositories(username) {
   const title = document.createElement('h1')
   title.innerHTML = 'Repositories'
-  resultSection.appendChild(title)
+  repositories.appendChild(title)
   try {
     let results = await listRepositories(username)
 
@@ -76,7 +77,7 @@ async function getRepositories(username) {
       forkIcon.classList.add('fas')
       forkIcon.classList.add('fa-code-branch')
 
-      resultSection.appendChild(container)
+      repositories.appendChild(container)
       container.appendChild(anchor)
       container.appendChild(div)
       div.appendChild(starIcon)
@@ -86,7 +87,7 @@ async function getRepositories(username) {
     })
   } catch ({ message }) {
     const div = document.createElement('div')
-    personalData.appendChild(div)
+    userData.appendChild(div)
     const errorMessage = document.createElement('p')
     errorMessage.innerHTML = message
     div.appendChild(errorMessage)
