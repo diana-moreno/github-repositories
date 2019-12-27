@@ -13,17 +13,21 @@
 <body>
   <section>
     <div>
-      <form action="" id='searcher' >
+      <form id='searcher'>
         <input type="text" name='username' placeholder="Search username...">
         <button>Search</button>
       </form>
     </div>
   </section>
 
+  <div id='result'>
+  </div>
+
 </body>
-  <script src="scripts/utils/fetch.js"></script>
+  <script src="scripts/utils/call.js"></script>
   <script src="scripts/utils/errors.js"></script>
   <script src="scripts/logic/list-repositories/index.js"></script>
-  <script src="scripts/helpers/call.js"></script>
   <script src="scripts/main.js"></script>
 </html>
+
+<!-- https://developer.github.com/v3/search/ -->
