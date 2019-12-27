@@ -1,17 +1,19 @@
 @import config
 
+html
+  font-size: 0.7rem
+
 body
-  background-color: $bodyBackgroundColor
+  margin: 0
 
 .container
-  width: 43rem
+  width: 100%
   margin: 0 auto
   background-color: white
   border-radius: 1rem
-  box-shadow: $boxShadow
 
   &__content
-    margin: 3rem
+    margin: 0 3rem
 
 .searcher
   padding: 3rem 0 3rem 0
@@ -19,7 +21,7 @@ body
   justify-content: space-between
 
   input
-    font-size: 1rem
+    font-size: 1.3rem
     padding: 0.5rem
     width: 80%
     border: $borderSearcher
@@ -27,11 +29,11 @@ body
     border-radius: 3px
 
   button
+    font-size: 1.3rem
     padding: 0.6rem
     border-radius: 3px
     border: $borderButton
     background-color: $buttonBackgroundColor
-    font-size: 1rem
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -68,7 +70,7 @@ input:-webkit-autofill:focus
   display: flex
   justify-content: space-between
   align-items: center
-  margin: 1rem 2rem
+  margin: 1rem 0rem
   border-bottom: $lineItem
 
   &__name
@@ -95,3 +97,29 @@ input:-webkit-autofill:focus
 
   p
     font-size: 1rem
+
+// Small tablets and large smartphones (landscape view)
+@media only screen and (min-width:576px)
+  html
+    font-size: 1rem
+
+  body
+    background-color: $bodyBackgroundColor
+
+  .container
+    width: 43rem
+    box-shadow: $boxShadow
+
+    &__content
+      margin: 3rem
+
+  .searcher
+
+    input
+      font-size: 1rem
+
+    button
+      font-size: 1rem
+
+  .repository
+    margin: 1rem 2rem
