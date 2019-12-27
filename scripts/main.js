@@ -4,12 +4,13 @@ const personalData = document.getElementById('personalData')
 
 searcher.addEventListener('submit', getData)
 
-function getData(event) {
+async function getData(event) {
   event.preventDefault()
   const username = event.target.username.value
-  clear()
-  getUser(username)
-  getRepositories(username)
+  clear(personalData)
+  clear(resultSection)
+  let user = await getUser(username)
+  user && await getRepositories(username)
 }
 
 async function getUser(username) {
@@ -33,8 +34,15 @@ async function getUser(username) {
     div.appendChild(name)
     div.appendChild(bio)
 
-  } catch (error) {
-    console.log(error.message)
+    return user
+
+  } catch ({ message }) {
+    const div = document.createElement('div')
+    personalData.appendChild(div)
+    const errorMessage = document.createElement('p')
+    errorMessage.innerHTML = message
+    div.appendChild(errorMessage)
+    div.classList.add('feedback')
   }
 }
 
@@ -42,7 +50,6 @@ async function getRepositories(username) {
   const title = document.createElement('h1')
   title.innerHTML = 'Repositories'
   resultSection.appendChild(title)
-
   try {
     let results = await listRepositories(username)
 
@@ -77,12 +84,17 @@ async function getRepositories(username) {
       div.appendChild(forkIcon)
       div.appendChild(forks)
     })
-  } catch (error) {
-    console.log(error.message)
+  } catch ({ message }) {
+    const div = document.createElement('div')
+    personalData.appendChild(div)
+    const errorMessage = document.createElement('p')
+    errorMessage.innerHTML = message
+    div.appendChild(errorMessage)
+    div.classList.add('feedback')
   }
 }
 
-function clear() {
-  while (resultSection.firstChild)
-    resultSection.removeChild(resultSection.firstChild)
+function clear(container) {
+  while (container.firstChild)
+    container.removeChild(container.firstChild)
 }

@@ -5,7 +5,6 @@ function retrieveUser(username) {
 
   return (async () => {
     const URL = `https://api.github.com/users/${username}`
-
     const res = await call(URL, {
       method: 'GET',
       headers: {
@@ -14,6 +13,6 @@ function retrieveUser(username) {
     })
 
     if (res.status === 200) return JSON.parse(res.body)
-    if (res.status === 404) throw new NotFoundError('Does not exist') // not found not exists
+    if (res.status === 404) throw new NotFoundError('Does not exist')
   })()
 }

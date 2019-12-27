@@ -13,6 +13,6 @@ function listRepositories(username) {
     })
 
     if (res.status === 200) return JSON.parse(res.body)
-    if (res.status === 404) throw new NotFoundError('Does not exist')
+    if (res.status === 404) throw new NotFoundError('There are no repositories')
   })()
 }
